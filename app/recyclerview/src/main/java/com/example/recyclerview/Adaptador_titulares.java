@@ -1,6 +1,8 @@
 package com.example.recyclerview;
 
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,7 +18,7 @@ public class Adaptador_titulares extends RecyclerView.Adapter<Adaptador_titulare
         this.datos = datos;
     }
 
-    
+
 
     public static class TitularesViewHolder extends RecyclerView.ViewHolder{
 
@@ -34,10 +36,6 @@ public class Adaptador_titulares extends RecyclerView.Adapter<Adaptador_titulare
 
         }
 
-
-
-
-
         public TextView getTxtTitulo() {
             return txtTitulo;
         }
@@ -53,9 +51,29 @@ public class Adaptador_titulares extends RecyclerView.Adapter<Adaptador_titulare
         public void setTxtSubtitulo(TextView txtSubtitulo) {
             this.txtSubtitulo = txtSubtitulo;
         }
+
+
+
+
     }
+    //CONSTRUYE LA VISTA
+    public TitularesViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType){
+        View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_component, viewGroup, false);
+        TitularesViewHolder tvh = new TitularesViewHolder(itemView);
+        return tvh;
 
 
+    }
+    //ASIGNA CADA COMPONENTE
+    public void onBindViewHolder(TitularesViewHolder holder, int position){
+        Titular titular = datos.get(position);
+        holder.bindTitular(titular);
+
+    }
+    //DEVUELVE EL TAMAÑO DEL ARRAY
+    public int getItemCount(){
+        return datos.size();
 
 
+    }
 }
